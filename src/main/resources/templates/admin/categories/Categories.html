@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout/LayoutAdmin.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="right-main" layout:fragment="content">
+    <div class="container p-3">
+        <div th:if="${message}">
+            <div class="alert alert-success" th:text="${message}"></div>
+        </div>
+        <div th:if="${errorMessage}">
+            <div class="alert alert-danger" th:text="${errorMessage}"></div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3">
+            <div class="col mt-3">
+                <h3>List Categories</h3>
+            </div>
+            <div class="col mt-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search..."
+                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-success" type="button" id="button-addon2"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="col mt-3 text-end">
+                <button type="button" class="btn btn-success" ><a th:href="@{/categories/add}" class="text-white">Add Category</a></button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped mt-5">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category, iterStat : ${page.content}">
+                    <td th:text="${iterStat.index + page.number * page.size + 1}"></td>
+                    <td th:text="${category.categoryName}"></td>
+                    <td th:text="${category.description.length() > 20 ? category.description.substring(0, 30) + '...' : category.description}"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger ms-3">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination d-flex justify-content-center mt-3">
+                    <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                        <a class="page-link" th:href="@{${page.number > 0} ? '/categories?page=' + ${page.number - 1} : '#'}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" th:classappend="${page.number == i} ? ' active'">
+                        <a class="page-link" th:href="@{'/categories?page=' + ${i}}" th:text="${i + 1}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                        <a class="page-link" th:href="@{${page.number < page.totalPages - 1} ? '/categories?page=' + ${page.number + 1} : '#'}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+    </div>
+    </div>
+</div>
+</body>
+</html>

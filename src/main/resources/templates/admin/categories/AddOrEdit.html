@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout/LayoutAdmin.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="right-main" layout:fragment="content">
+  <div class="container p-4">
+    <h4>Add New Category</h4>
+   <hr class="mb-5">
+    <form th:action="@{/categories/saveOrUpdate}" th:object="${category}" method="post">
+      <div class="form-group mb-3">
+        <label for="name">Category Name</label>
+        <input type="text" id="name" th:field="*{categoryName}" class="form-control mt-2" placeholder="Enter category name" >
+        <div th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}" class="text-danger"></div>
+      </div>
+      <div class="form-group mb-3">
+        <label for="description">Description</label>
+          <textarea id="description" th:field="*{description}" class="form-control mt-2" placeholder="Enter description" rows="4"></textarea>
+        <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></div>
+      </div>
+      <hr>
+        <div class="row">
+             <div class="col-6">
+                 <button type="submit" class="btn btn-success me-3 mt-2">Add Category</button>
+                 <button type="reset" class="btn btn-dark mt-2">Reset</button>
+             </div>
+            <div class="col-6 text-end">
+                <button type="button" class="btn btn-primary mt-2">List Categories</button>
+            </div>
+
+        </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
