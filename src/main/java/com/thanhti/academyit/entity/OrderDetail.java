@@ -1,5 +1,4 @@
 package com.thanhti.academyit.entity;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,4 +19,7 @@ public class OrderDetail {
     @JoinColumn(name = "productId")
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    private Order order;
 }

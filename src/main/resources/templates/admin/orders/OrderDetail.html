@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout/LayoutAdmin.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="right-main p-3" layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Chi tiết đơn hàng</h2>
+        <button type="button" class="btn btn-primary">
+            <a th:href="@{'/orders/edit/' + ${order.orderId}}" class="text-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+        </button>
+    </div>
+    <hr>
+    <form th:action="@{/admin/order/update}" method="post" th:object="${order}">
+        <div class="info mb-4">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6><i class="fa-solid fa-circle-info"></i> Thông tin đơn hàng</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="orderId"><b>Mã đơn hàng</b></label>
+                                <input type="text" class="form-control" id="orderId" th:value="${order.orderId}" readonly>
+                            </div>
+                            <div class="form-group mt-2 d-flex justify-content-between">
+                                <label ><b>Order Date:</b></label>
+                                <p><b th:text="*{#dates.format(orderDate, 'dd-MM-yyyy')}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6><i class="fa-solid fa-money-check-dollar"></i> Thanh toán</h6>
+                        </div>
+                        <div class="card-body d-flex justify-content-between">
+                            <div>
+                                <p><b>Trạng thái thanh toán</b></p>
+                            </div>
+                            <div class="form-group">
+                                <select th:field="*{statusCheckout}" class="form-select">
+                                    <option value="false">Chưa thanh toán</option>
+                                    <option value="true">Đã thanh toán</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6><i class="fa-solid fa-truck-fast"></i> Giao hàng</h6>
+                        </div>
+                        <div class="card-body d-flex justify-content-between ">
+                            <div>
+                                <p><b>Trạng thái giao hàng</b></p>
+                            </div>
+                            <div class="form-group">
+                                <select th:field="*{status}" class="form-select">
+                                    <option value="0">Đang xử lý</option>
+                                    <option value="1">Đang vận chuyển</option>
+                                    <option value="2">Đã giao</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row main mt-4">
+            <div class="col-md-9 info-product">
+                <h5><i class="fa-solid fa-cart-arrow-down"></i> Thông tin sản phẩm</h5>
+                <hr>
+                <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterStat : ${listOrderDetails}">
+                        <td th:text="${iterStat.index + 1}"></td>
+                        <td>
+                            <img th:src="@{${item.product.image}}" alt="Product Image" class="animate__animated animate__flip" style="max-width: 50px; max-height: 50px;">
+                        </td>
+                        <td th:text="${item.product.name}"></td>
+                        <td th:text="${item.quantity}"></td>
+                        <td>[[${#numbers.formatDecimal(item.unitPrice, 0, 'POINT', 0, 'POINT')}]]<span class="vnd">đ</span></td>
+                        <td>[[${#numbers.formatDecimal(item.quantity * item.unitPrice, 0, 'POINT', 0, 'POINT')}]]<span class="vnd">đ</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-end">
+                    <div class="p-2">
+                        <p>Tổng tiền: </p>
+                        <p>Phí vận chuyển: </p>
+                        <p>Giảm giá: </p>
+                        <h6>Tổng tiền thanh toán: </h6>
+                    </div>
+                    <div class="p-2">
+                        <p>[[${#numbers.formatDecimal(total, 0, 'POINT', 0, 'POINT')}]]đ</p>
+                        <p>0đ</p>
+                        <p>0đ</p>
+                        <h6 style="color: crimson;">[[${#numbers.formatDecimal(total, 0, 'POINT', 0, 'POINT')}]]đ</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 info-customer">
+                <h5><i class="fa-solid fa-user-large"></i> Thông tin khách hàng</h5>
+                <hr>
+                <div class="form-group">
+                    <label for="note"><b>Ghi chú của khách hàng</b></label>
+                    <textarea id="note" rows="3" class="form-control" th:field="*{note}"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-file-pen"></i> Update</button>
+                <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

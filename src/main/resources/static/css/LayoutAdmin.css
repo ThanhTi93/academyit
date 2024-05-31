@@ -161,7 +161,6 @@ th {
         }
         .right-main {
             background-color: #f1f2f7;
-            min-height: calc(100vh - 70px);
         }
     }
 }
@@ -201,6 +200,7 @@ th {
         }
       }
 
+
 }
  /* laptop */
 @media screen and (min-width: 769px) {
@@ -211,6 +211,14 @@ th {
                 display: none;
             }
           }
+     .right {
+         .right-main {
+
+                    height: calc(100vh - 70px);
+                    overflow-y: auto;
+
+                 }
+    }
      }
 
 }
