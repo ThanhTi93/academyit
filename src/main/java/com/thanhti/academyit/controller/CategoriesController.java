@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,11 +25,20 @@ public class CategoriesController {
     private CategoryService categoryService;
 
     @RequestMapping("")
-    public String showCategories( ModelMap model,
+    public String showCategories(ModelMap model,
+                                 @RequestParam(name = "name", required = false) String name,
                                  @RequestParam(value = "page", defaultValue = "0") int page,
                                  @RequestParam(value = "size", defaultValue = "5") int size) {
+
         Pageable pageable = PageRequest.of(page, size);
-        Page<Category> categoryPage = categoryService.findPaginated(pageable);
+        Page<Category> categoryPage;
+
+        if (StringUtils.hasText(name)) {
+            categoryPage = categoryService.findByCategoryNameContaining(name, pageable);
+        } else {
+            categoryPage = categoryService.findPaginated(pageable);
+        }
+
         model.addAttribute("page", categoryPage);
         return "admin/categories/Categories";
     }

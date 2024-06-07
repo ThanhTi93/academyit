@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+a {
+    text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+nav {
+    background-color: #ffd400;
+
+    .icon-header {
+        font-size: 1.5rem;
+    }
+
+    .navbar-brand {
+        height: 50px;
+    }
+
+    .navbar-collapse {
+        justify-content: space-between;
+
+        .navbar-nav {
+            margin: 0 !important;
+
+            .nav-link {
+                color: #C54988;
+            }
+        }
+    }
+}
+
+.banner {
+    position: relative;
+
+    .carousel {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 50%);
+
+        img {
+            border-radius: 15px;
+        }
+
+        .carousel-control-prev {
+            width: fit-content;
+        }
+
+        .carousel-control-next {
+            width: fit-content;
+        }
+    }
+}
+
+main {
+    background-color: #f3f3f3;
+    padding-top: 100px;
+
+    .mobile {
+        background-color: #FEC667;
+        --bs-gutter-x: 0rem;
+    }
+
+    .tivi {
+        background-color: #1f4ea6;
+        --bs-gutter-x: 0rem;
+    }
+
+    .watch {
+        background-color: #d0021c;
+        --bs-gutter-x: 0rem;
+
+        .col {
+            .card {
+                 padding: 40px;
+                 background-image: url(../img/Frame-knockout-desktop-226x500.webp);
+                 background-repeat: no-repeat;
+                 background-size: 100% 100%;
+            }
+
+        }
+    }
+
+    .product {
+        position: relative;
+
+        .prev {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #fff;
+            background-color: #C54988;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .next {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #fff;
+            background-color: #C54988;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+}

@@ -13,4 +13,6 @@ public interface CategoryService {
     Page<Category> findPaginated(Pageable pageable);
 
     List<Category> findAll();
+
+    Page<Category> findByCategoryNameContaining(String name, Pageable pageable);
 }

@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://acsvietnam.com.vn/uploads/page/wyswyg/2024_02/1706784225u3sd78uqs5_1707988852.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100% ;
+}
+
+input {
+    background-color: rgba(231, 225, 225, 0.1);
+}
