@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
@@ -17,4 +18,6 @@ public interface ProductService {
     Page<Product> findPaginated(Pageable pageable);
 
     Optional<Product> findById(Long id);
+
+    List<Product> findAllMobile();
 }

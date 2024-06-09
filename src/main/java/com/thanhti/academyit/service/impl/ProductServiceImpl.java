@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -57,5 +58,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
+    }
+
+    @Override
+    public List<Product> findAllMobile() {
+        return productRepository.findAllMobile();
     }
 }
