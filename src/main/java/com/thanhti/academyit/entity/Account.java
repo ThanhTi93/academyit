@@ -2,8 +2,7 @@ package com.thanhti.academyit.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -11,25 +10,24 @@ import java.time.LocalDateTime;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Column(nullable = false, unique = true)
+    private String email;  // Use email as a natural ID without @GeneratedValue
 
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)  // Sử dụng EnumType.STRING để lưu giá trị enum dưới dạng chuỗi
     @Column(nullable = false)
-    private String role = "user"; // default value is 'user'
+    private UserRole role;
 
     // Relationships
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private Customer customer;
 
-    @Column(name = "confirmation_token")
-    private String confirmationToken; // Add confirmationToken field
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    private List<CartItem> cartItemList;
 
-    @Column(name = "enabled")
-    private boolean enabled;
+    @OneToMany(mappedBy = "account")
+    private  List<Order> orderList ;
+
 }

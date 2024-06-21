@@ -38,6 +38,26 @@ nav {
 
         .navbar-nav {
             margin: 0 !important;
+            .nav-item:nth-child(1) {
+                            position: relative;
+
+                            input {
+                                border: none;
+                                padding: 5px 10px;
+                                border-radius: 24px;
+                                font-size: 1rem;
+                            }
+
+                            button {
+                                position: absolute;
+                                border: none;
+                                background: none;
+                                right: 10px;
+                                font-size: 1rem;
+                                top: 50%;
+                                transform: translateY(-50%);
+                            }
+                        }
 
             .nav-link {
                 color: #C54988;
@@ -183,3 +203,52 @@ main {
   .icon-hover:hover i {
     color: #3b71ca !important;
   }
+  .cart-reduced,.cart-increase {
+       padding:0 6px;
+       border-radius: 50%;
+       background-color: #3108d8;
+       color: white;
+       border: none;
+  }
+  .center-text {
+      text-align: center;
+    }
+
+     /* screen laptop */
+    @media screen and (min-width: 992px) {
+
+        nav {
+            .icon-header {
+                .nav-item {
+                    margin-left: 30px;
+                }
+            }
+
+            .navbar-nav {
+                align-items: center;
+            }
+        }
+    }
+     /* screen mobile */
+     @media screen and (max-width: 991px) {
+
+        nav {
+            .icon-header {
+               flex-direction: row;
+               justify-content: space-between;
+            }
+            .navbar-collapse {
+
+                .navbar-nav {
+                    .nav-item:nth-child(1) {
+                        display: flex;
+                        align-items: center;
+                     }
+                    .nav-item:nth-child(2) {
+                        order: -1;
+                     }
+                }
+            }
+
+        }
+    }

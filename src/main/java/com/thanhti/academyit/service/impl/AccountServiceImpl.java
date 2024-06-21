@@ -1,15 +1,15 @@
 package com.thanhti.academyit.service.impl;
 
+import com.thanhti.academyit.dto.AccountDTO;
 import com.thanhti.academyit.entity.Account;
+import com.thanhti.academyit.entity.UserRole;
 import com.thanhti.academyit.repository.AccountRepository;
 import com.thanhti.academyit.service.AccountService;
-import jakarta.mail.MessagingException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -20,24 +20,28 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private EmailServiceImpl emailService;
 
-    @Override
-    public Account registerAccount(Account account) throws MessagingException {
-        account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
+    @Autowired
+    private BCryptPasswordEncoder  bCryptPasswordEncoder;
 
+    @Override
+    public Account registerAccount(AccountDTO accountDTO) {
+
+        accountDTO.setPassword(new BCryptPasswordEncoder().encode(accountDTO.getPassword()));
+        Account account = new Account();
+        BeanUtils.copyProperties(accountDTO, account);
+
+        account.setRole(UserRole.USER);
         accountRepository.save(account);
 
         return account;
     }
 
-    @Override
-    public boolean confirmUser(String confirmationToken) {
-        Account account = accountRepository.findByConfirmationToken(confirmationToken);
+   public  Account login(AccountDTO accountDTO) {
+        Optional<Account> opt = accountRepository.findById(accountDTO.getEmail());
 
-        if (account != null) {
-            accountRepository.save(account);
-            return true;
+        if(opt.isPresent() && bCryptPasswordEncoder.matches(accountDTO.getPassword(), opt.get().getPassword())) {
+            return  opt.get();
         }
-
-        return false;
-    }
+        return null ;
+   }
 }

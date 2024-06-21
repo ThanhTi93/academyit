@@ -66,3 +66,19 @@ window.addEventListener("resize", () => {
   showSlides('tablet', slideIndexes.tablet);
   showSlides('detail', slideIndexes.detail);
 });
+
+// ========== Quantity cartItem  ===========
+
+var giam = document.getElementById("button-addon1");
+var tang = document.getElementById("button-addon2");
+var quantity = document.getElementById("quantityItem");
+
+giam.addEventListener("click", () => {
+    if (quantity.value > 1) {
+        quantity.value--;
+    }
+})
+
+tang.addEventListener("click", () => {
+    quantity.value++;
+})

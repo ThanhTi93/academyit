@@ -26,13 +26,13 @@
 </div>
 <!-- Heading -->
 <!-- content -->
-<section class="py-5">
+<section class="py-5" th:object="${product}" >
     <div class="container">
         <div class="row gx-5">
             <aside class="col-lg-6">
                 <div class="border rounded-4 mb-3 d-flex justify-content-center p-3">
                     <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp">
-                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="https://cdn.tgdd.vn/Products/Images/42/326016/vivo-y28-vang-thumb-600x600.jpg" />
+                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" th:src="${product.image}" />
                     </a>
                 </div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 p-2 detail">
@@ -70,7 +70,9 @@
                     <button class="next" onclick="plusSlides(`detail`,1)">&#10095;</button>
                 </div>
             </aside>
+
             <main class="col-lg-6">
+                <form th:action="@{'/addCart/' + ${product.productId}}" method="post">
                 <div class="ps-lg-3">
                     <h4 class="title text-dark">
                         Quality Men's Hoodie for Winter, Men's Fashion <br />
@@ -117,7 +119,7 @@
 
                     <hr />
 
-                    <div class="row mb-4">
+                    <div class="row ">
                         <div class="col-md-4 col-6">
                             <label class="mb-2">Size</label>
                             <select class="form-select border border-secondary" style="height: 35px;">
@@ -133,7 +135,7 @@
                                 <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
                                     <i class="fas fa-minus"></i>
                                 </button>
-                                <input type="text" class="form-control text-center border border-secondary" placeholder="14" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                                <input type="text" name="quantityItem" id="quantityItem" class="form-control text-center border border-secondary"  aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" />
                                 <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
                                     <i class="fas fa-plus"></i>
                                 </button>
@@ -141,9 +143,10 @@
                         </div>
                     </div>
                     <a href="#" class="btn btn-warning text-white shadow-0"> Buy now </a>
-                    <a href="#" class="btn btn-success shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+                    <button type="submit" class="btn btn-success shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </button>
                     <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
                 </div>
+                </form>
             </main>
         </div>
     </div>

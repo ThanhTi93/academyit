@@ -128,6 +128,7 @@
             </div>
             <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 p-2 product">
                 <div class="col" th:each="item, iterStat : ${listMobile}">
+                    <a th:href="@{'/detail/' + ${item.productId}}" class="text-white">
                     <div class="card shadow-lg mt-2" >
                         <img th:src="@{${item.image}}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -139,6 +140,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <button class="prev" onclick="plusSlides(`mobile`,-1)">&#10094;</button>
                 <button class="next" onclick="plusSlides(`mobile`,1)">&#10095;</button>

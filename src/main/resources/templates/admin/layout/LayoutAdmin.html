@@ -24,11 +24,8 @@
 
 <body>
 <div class="container-fluid admin">
-    <div class="left">
-        <div th:replace="admin/fragments/MenuLaptop:: menulaptop"></div>
-        <div th:replace="admin/fragments/MenuMobile:: menumobile"></div>
-    </div>
-    <div class="right">
+    <div th:replace="admin/fragments/Menu:: menu"></div>
+    <div class="right" id="main-content">
         <div th:replace="admin/fragments/Header:: header"></div>
         <div layout:fragment="content"></div>
     </div>

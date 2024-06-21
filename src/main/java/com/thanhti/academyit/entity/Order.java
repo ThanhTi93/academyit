@@ -13,6 +13,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
+    @Column(unique = true, nullable = true)
+    private String phone;
+
     @Temporal(TemporalType.DATE)
     private Date orderDate;
 
@@ -23,15 +26,22 @@ public class Order {
     private String shipAddress;
 
     @Column(columnDefinition = "varchar(200)")
-    private String note;
+    private String name;
 
+    @Enumerated(EnumType.STRING)  // Sử dụng EnumType.STRING để lưu giá trị enum dưới dạng chuỗi
     @Column(nullable = false)
-    private short status;
+    private OrderStatus status;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private boolean statusCheckout;
+    private StatusCheckOut statusCheckout;
 
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "email")
+    private  Account account;
+
 }
 

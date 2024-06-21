@@ -64,4 +64,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAllMobile() {
         return productRepository.findAllMobile();
     }
+
+    @Override
+    public Optional<Product> findByIdWithCartItems(Long id) {
+        return productRepository.findByIdWithCartItems(id);
+    }
 }

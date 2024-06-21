@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -37,5 +38,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "categoryId")
     private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItemList;
 
 }

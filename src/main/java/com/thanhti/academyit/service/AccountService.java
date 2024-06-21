@@ -1,11 +1,12 @@
 package com.thanhti.academyit.service;
 
+import com.thanhti.academyit.dto.AccountDTO;
 import com.thanhti.academyit.entity.Account;
 import jakarta.mail.MessagingException;
 
 public interface AccountService {
 
-    public Account registerAccount(Account account) throws MessagingException;
+    public Account registerAccount(AccountDTO accountDTO) throws MessagingException;
 
-    public boolean confirmUser(String confirmationToken);
+    public  Account login(AccountDTO accountDTO);
 }

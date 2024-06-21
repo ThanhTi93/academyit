@@ -27,7 +27,7 @@ public class Customer {
     private String image;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "email", nullable = false, referencedColumnName = "email")
     private Account account;
 
 }

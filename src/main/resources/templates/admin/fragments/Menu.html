@@ -6,46 +6,46 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="menulaptop">
-    <div class="left-laptop">
+<div th:fragment="menu" class="left">
         <div class="header">
-            <h1>Sufee Admin</h1>
-            <h1 class="hidden"><i class="fa-brands fa-stripe-s"></i></h1>
+            <h1 class="hidden">Sufee Admin</h1>
+            <h1 ><i class="fa-brands fa-stripe-s"></i></h1>
             <div class="icon">
-                <i class="fa-solid fa-hand-point-left"></i>
-                <i class="fa-solid fa-hand-point-right hidden"></i>
+                <i class="fa-solid fa-hand-point-left hidden"></i>
+                <i class="fa-solid fa-hand-point-right "></i>
             </div>
         </div>
+    <div class="left-main ">
         <div class="content">
             <i class="fa-solid fa-gauge"></i>
-            <p>Dashboard</p>
+            <p class="hidden">Dashboard</p>
         </div>
-        <h2>UI ELEMENTS</h2>
+        <h2 class="hidden">UI ELEMENTS</h2>
         <a th:href="@{/categories}" class="text-white">
         <div class="content">
             <i class="fa-solid fa-layer-group"></i>
-            <p>Categories</p>
+            <p class="hidden">Categories</p>
         </div>
         </a>
         <a th:href="@{/products}" class="text-white">
             <div class="content">
                 <i class="fa-brands fa-product-hunt"></i>
-                <p>Products</p>
+                <p class="hidden">Products</p>
             </div>
         </a>
         <a th:href="@{/orders}" class="text-white">
         <div class="content">
             <i class="fa-solid fa-cart-arrow-down"></i>
-            <p>Orders</p>
+            <p class="hidden">Orders</p>
         </div>
         </a>
         <div class="content">
             <i class="fa-solid fa-users"></i>
-            <p>Customers</p>
+            <p class="hidden">Customers</p>
         </div>
         <div class="content">
             <i class="fa-solid fa-id-card"></i>
-            <p>Profile</p>
+            <p class="hidden">Profile</p>
         </div>
     </div>
 </div>
