@@ -76,3 +76,8 @@ function previewImage(input) {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+function showConfirmModalDialog(id , url) {
+    const yesOption = document.getElementById("yesOption");
+    yesOption.setAttribute("href" , url + id);
+}

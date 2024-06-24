@@ -17,8 +17,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @Controller
-@RequestMapping("/categories")
+@RequestMapping("admin/categories")
 public class CategoriesController {
 
     @Autowired
@@ -59,6 +61,33 @@ public class CategoriesController {
         BeanUtils.copyProperties(dto, entity);
         categoryService.save(entity);
         model.addAttribute("message", "Category is saved!");
-        return new ModelAndView("forward:/categories", model);
+        return new ModelAndView("forward:/admin/categories", model);
+    }
+
+    @GetMapping("/edit/{categoryId}")
+    public  ModelAndView edit(ModelMap model, @PathVariable("categoryId") Long id) {
+
+        Optional<Category> opt = categoryService.findById(id);
+        CategoryDTO dto = new CategoryDTO();
+
+        if(opt.isPresent()) {
+            Category entity = opt.get();
+            BeanUtils.copyProperties(entity, dto);
+            dto.setIsEdit(true);
+            model.addAttribute("category", dto);
+            return new ModelAndView("admin/categories/AddOrEdit", model);
+        }
+        model.addAttribute("message", "Category is not existed");
+
+        return new ModelAndView("forward:/admin/categories", model);
+    }
+
+    @GetMapping("delete/{categoryId}")
+    public  ModelAndView deleted(ModelMap model,@PathVariable("categoryId") Long id ) {
+
+           categoryService.deleteById(id);
+        model.addAttribute("message", "Category is deleted !");
+
+        return new ModelAndView("forward:/admin/categories", model);
     }
 }

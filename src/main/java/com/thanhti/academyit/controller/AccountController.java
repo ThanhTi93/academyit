@@ -36,7 +36,7 @@ public class AccountController {
     @Autowired
     HttpSession session;
 
-    @GetMapping("/register")
+    @GetMapping("/login")
     public String showRegistrationForm(Model model) {
         model.addAttribute("accountDTO", new AccountDTO());
         return "client/auth/Authentication";
@@ -53,9 +53,9 @@ public class AccountController {
         session.setAttribute("account",account);
         session.setAttribute("checkLogin", true);
         if(account.getRole() == UserRole.USER) {
-            return  new ModelAndView("client/home/Home", model);
+            return  new ModelAndView("redirect:/", model);
         }
-        return  new ModelAndView("redirect:/categories", model);
+        return  new ModelAndView("redirect:/admin/categories", model);
  }
 
     @PostMapping("/register")

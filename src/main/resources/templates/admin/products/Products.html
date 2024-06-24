@@ -64,8 +64,7 @@
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
                         </a>
-
-                        <button type="button" class="btn btn-danger ms-3" >
+                        <button th:data-id="${product.productId}" data-bs-toggle="modal" data-bs-target="#confirmDelete" onclick="showConfirmModalDialog(this.getAttribute('data-id'),`/products/delete/`)" type="button" class="btn btn-danger ms-3">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </td>

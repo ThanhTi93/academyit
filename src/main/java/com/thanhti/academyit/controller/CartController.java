@@ -31,7 +31,7 @@ public class CartController {
     public String viewCart(Model model) {
         Account account = (Account) httpSession.getAttribute("account");
         if (account == null) {
-            return "redirect:/register";
+            return "redirect:/login";
         }
         // Retrieve the cart items for the logged-in account
         List<CartItem> cartItems = cartItemService.findByAccountEmail(account.getEmail());
@@ -50,7 +50,7 @@ public class CartController {
         Optional<Product> otp = productService.findByIdWithCartItems(productId);
         Account account = (Account) httpSession.getAttribute("account");
         if (account == null) {
-            return "redirect:/register";
+            return "redirect:/login";
         }
 
         int quantityToAdd = Integer.parseInt(quantity);
@@ -79,7 +79,7 @@ public class CartController {
     public String increaseCartItem(@PathVariable("itemId") Long itemId) {
         Account account = (Account) httpSession.getAttribute("account");
         if (account == null) {
-            return "redirect:/register";
+            return "redirect:/login";
         }
 
         // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng
@@ -97,7 +97,7 @@ public class CartController {
     public String decreaseCartItem(@PathVariable("itemId") Long itemId) {
         Account account = (Account) httpSession.getAttribute("account");
         if (account == null) {
-            return "redirect:/register";
+            return "redirect:/login";
         }
 
         // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng

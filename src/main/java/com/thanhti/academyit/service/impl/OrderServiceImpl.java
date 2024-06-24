@@ -2,6 +2,7 @@ package com.thanhti.academyit.service.impl;
 
 import com.thanhti.academyit.dto.OrderDTO;
 import com.thanhti.academyit.entity.*;
+import com.thanhti.academyit.repository.CartItemRepository;
 import com.thanhti.academyit.repository.OrderDetailRepository;
 import com.thanhti.academyit.repository.OrderRepository;
 import com.thanhti.academyit.service.OrderService;
@@ -23,6 +24,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
+    @Autowired
+    CartItemRepository cartItemRepository ;
+
     @Override
     public Page<Order> findPaginated(Pageable pageable) {
         return orderRepository.findAll(pageable) ;
@@ -34,11 +38,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void createOrder(OrderDTO order, List<CartItem> cartItems) {
+    public <S extends Order> S save(S entity) {
+        return orderRepository.save(entity);
+    }
+
+    @Override
+    public void createOrder(OrderDTO order, List<CartItem> cartItems, Account account) {
         // Convert OrderDTO to Order entity if needed
         Order orderEntity = new Order();
-        orderEntity.setStatus(OrderStatus.UNPAID);
-        orderEntity.setStatusCheckout(StatusCheckOut.DELIVERED);
+        orderEntity.setAccount(account);
+        orderEntity.setStatus(OrderStatus.valueOf(order.getPaymentMethod()));
+        orderEntity.setStatusCheckout(StatusCheckOut.PROCESSING);
         orderEntity.setOrderDate(new Date());
         orderEntity.setFreight(Double.valueOf("20"));
         orderEntity.setName(order.getName());
@@ -56,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
             orderDetail.setOrder(orderEntity);
 
             orderDetailRepository.save(orderDetail);
+            cartItemRepository.delete(cartItem);
         }
     }
 }

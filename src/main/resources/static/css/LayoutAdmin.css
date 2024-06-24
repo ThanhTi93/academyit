@@ -211,3 +211,11 @@ th {
     border-radius: 30%;
     z-index: 1;
 }
+
+.paid {
+    color: green !important;
+}
+
+.unpaid {
+    color: red !important;
+}

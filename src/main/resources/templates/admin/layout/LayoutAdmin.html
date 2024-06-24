@@ -30,6 +30,29 @@
         <div layout:fragment="content"></div>
     </div>
 </div>
+<!-- modal -->
+<div class="modal fade" id="confirmDelete" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-5">
+                <h3 class="text-center">Are you sure?</h3>
+                <p class="text-center">Do you really want to delete these records? This process cannot be undone.</p>
+            </div>
+            <div class="footer-modal d-flex justify-content-evenly pb-3">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                <a id="yesOption">
+                <button type="button" class="btn btn-danger">Delete</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/js/LayoutAdmin.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

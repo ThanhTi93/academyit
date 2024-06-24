@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -35,5 +36,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Page<Category> findByCategoryNameContaining(String name, Pageable pageable) {
         return categoryRepository.findByCategoryNameContaining(name, pageable);
+    }
+
+    @Override
+    public Optional<Category> findById(Long id) {
+        return categoryRepository.findById(id);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+          categoryRepository.deleteById(id);
     }
 }

@@ -13,7 +13,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @Column(unique = true, nullable = true)
+    @Column( nullable = true)
     private String phone;
 
     @Temporal(TemporalType.DATE)

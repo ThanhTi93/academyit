@@ -20,7 +20,7 @@
                 <h3>List Categories</h3>
             </div>
             <div class="col mt-3">
-                <form th:action="@{/categories}" method="get">
+                <form th:action="@{/admin/categories}" method="get">
                 <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search..." name="name" aria-label="Recipient's username" aria-describedby="button-addon2">
                         <button class="btn btn-success" type="submit" id="button-addon2">
@@ -30,7 +30,7 @@
                 </form>
             </div>
             <div class="col mt-3 text-end">
-                <button type="button" class="btn btn-success" ><a th:href="@{/categories/add}" class="text-white">Add Category</a></button>
+                <a th:href="@{/admin/categories/add}" type="button" class="btn btn-success text-white">Add Category</a>
             </div>
         </div>
         <div class="table-responsive">
@@ -49,29 +49,28 @@
                     <td th:text="${category.categoryName}"></td>
                     <td th:text="${category.description.length() > 30 ? category.description.substring(0, 30) + '...' : category.description}"></td>
                     <td>
-                        <button type="button" class="btn btn-primary">
+                        <a th:href="@{'/admin/categories/edit/' + ${category.categoryId}}" type="button" class="btn btn-primary text-white">
                             <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger ms-3">
+                        </a>
+                        <button th:data-id="${category.categoryId}" data-bs-toggle="modal" data-bs-target="#confirmDelete" onclick="showConfirmModalDialog(this.getAttribute('data-id'),`/admin/categories/delete/`)" type="button" class="btn btn-danger ms-3">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </td>
                 </tr>
                 </tbody>
             </table>
-
             <nav aria-label="Page navigation example">
                 <ul class="pagination d-flex justify-content-center mt-3">
                     <li class="page-item" th:classappend="${page.first} ? 'disabled'">
-                        <a class="page-link" th:href="@{${page.number > 0} ? '/categories?page=' + ${page.number - 1} : '#'}" aria-label="Previous">
+                        <a class="page-link" th:href="@{${page.number > 0} ? '/admin/categories?page=' + ${page.number - 1} : '#'}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                     <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" th:classappend="${page.number == i} ? ' active'">
-                        <a class="page-link" th:href="@{'/categories?page=' + ${i}}" th:text="${i + 1}"></a>
+                        <a class="page-link" th:href="@{'/admin/categories?page=' + ${i}}" th:text="${i + 1}"></a>
                     </li>
                     <li class="page-item" th:classappend="${page.last} ? 'disabled'">
-                        <a class="page-link" th:href="@{${page.number < page.totalPages - 1} ? '/categories?page=' + ${page.number + 1} : '#'}" aria-label="Next">
+                        <a class="page-link" th:href="@{${page.number < page.totalPages - 1} ? '/admin/categories?page=' + ${page.number + 1} : '#'}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
